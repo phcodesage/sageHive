@@ -2,11 +2,77 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <title>SageHive - API Testing Tool</title>
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
   </head>
   <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+    <div class="sidebar">
+      <h2>Requests</h2>
+      <button id="newRequest" class="button">New Request</button>
+      <div id="requestList"></div>
+    </div>
+    
+    <div class="main-content">
+      <div class="request-panel">
+        <div class="url-bar">
+          <select id="httpMethod">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="DELETE">DELETE</option>
+            <option value="PATCH">PATCH</option>
+          </select>
+          <input type="text" id="urlInput" placeholder="Enter URL" />
+          <button id="sendRequest" class="button">Send</button>
+        </div>
+        
+        <div class="tabs">
+          <button class="tab-button active" data-tab="headers">Headers</button>
+          <button class="tab-button" data-tab="body">Body</button>
+          <button class="tab-button" data-tab="params">Params</button>
+        </div>
+        
+        <div class="tab-content" id="headers">
+          <div class="headers-container">
+            <div class="header-row">
+              <input type="text" placeholder="Key" />
+              <input type="text" placeholder="Value" />
+              <button class="remove-header">×</button>
+            </div>
+            <button id="addHeader" class="button">Add Header</button>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="body" style="display: none;">
+          <textarea id="requestBody" placeholder="Request body (JSON)"></textarea>
+        </div>
+        
+        <div class="tab-content" id="params" style="display: none;">
+          <div class="params-container">
+            <div class="param-row">
+              <input type="text" placeholder="Key" />
+              <input type="text" placeholder="Value" />
+              <button class="remove-param">×</button>
+            </div>
+            <button id="addParam" class="button">Add Parameter</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="response-panel">
+        <div class="response-header">
+          <span id="statusCode"></span>
+          <span id="responseTime"></span>
+        </div>
+        <div class="response-body">
+          <pre id="responseData"></pre>
+        </div>
+      </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-json.min.js"></script>
+    <script src="renderer.js"></script>
   </body>
 </html>
